@@ -9,8 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-// year , state and cause --> aim is to find the highest disease in the most concentrated area 
-// and the lowest disease in the least concentrated area 
+// year , state and cause --> aim is to find the highest disease in the most concentrated area
+// and the lowest disease in the least concentrated area
 // Add a menu to select various feilds (upto 2)
 
 public class Identify {
@@ -31,15 +31,14 @@ public class Identify {
 			while ((strLine = br.readLine()) != null){
 				Data temp = new Data();
 				List<String> column = Arrays.asList(strLine.split(","));
-
 				// if the length is greater than 6 than we have an issue
 				if (column.toArray().length == 6 ) {
-                    temp.setYear(column.toArray()[0].toString());
-                    temp.setCause(column.toArray()[1].toString());
-                    temp.setCauseName(column.toArray()[2].toString());
-                    temp.setDeaths(column.toArray()[3].toString());
-                    temp.setState(column.toArray()[4].toString());
-                    temp.setAgeAdjDeathRate(column.toArray()[5].toString());
+					temp.setYear(column.toArray()[0].toString());
+					temp.setCause(column.toArray()[1].toString());
+					temp.setCauseName(column.toArray()[2].toString());
+					temp.setDeaths(column.toArray()[3].toString());
+					temp.setState(column.toArray()[4].toString());
+					temp.setAgeAdjDeathRate(column.toArray()[5].toString());
 				}
 				else if (column.toArray().length == 9 ){
 					String tempStr = "";
@@ -48,17 +47,18 @@ public class Identify {
 					r = Pattern.compile(pattern);				
 					m = r.matcher(tempStr);
 					if (m.find()) {
-	                    temp.setYear(column.toArray()[0].toString());
-	                    temp.setCause(m.group(1));
-	                    temp.setCauseName(column.toArray()[5].toString());
-	                    temp.setDeaths(column.toArray()[6].toString());
-	                    temp.setState(column.toArray()[7].toString());
-	                    temp.setAgeAdjDeathRate(column.toArray()[8].toString());
+						temp.setYear(column.toArray()[0].toString());
+						temp.setCause(m.group(1));
+						temp.setCauseName(column.toArray()[5].toString());
+						temp.setDeaths(column.toArray()[6].toString());
+						temp.setState(column.toArray()[7].toString());
+						temp.setAgeAdjDeathRate(column.toArray()[8].toString());
 					}
 					else {
 						System.exit(0);
 					}				
 				}
+
 				dataArray.add(temp);
             }
 			for (Data element : dataArray) {
@@ -67,20 +67,10 @@ public class Identify {
 				}
 			}
 		}
-		catch (FileNotFoundException e){
-			puts("File not found");
-			System.exit(0);
-		}
-		catch (IOException e) {
-			puts("Error processing file");
-			
-		}		
+		catch (FileNotFoundException e){ puts("File not found\n\n" + e); System.exit(0); }
+		catch (IOException e) {puts("Error processing file\n\n"
+				+ "" + e); System.exit(0); }		
 	}
-//	private static void puts( String arg) {
-//		System.out.println(arg);
-//		//System.out.print(arg+"|");
-//	}
-	
 	private static <T> void puts(T var) {
 		System.out.println(var.toString());
 	}
@@ -91,9 +81,7 @@ public class Identify {
 			String tmp = reader.readLine();
 			return tmp;
 		}
-		catch (IOException e){
-			puts(e);
-		}
+		catch (IOException e){ puts(e);	}
 		return null;
 	}
 	private static void PrintData(Data[] var, String var1, String var2) {
