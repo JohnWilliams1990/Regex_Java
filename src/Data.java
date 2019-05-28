@@ -41,7 +41,8 @@ public class Data {
 		puts("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		puts("Cause Of Death: " + item.cause);
 		puts("Year: " + item.year);
-		puts("State: "+item.deaths);
+		puts("State: "+item.state);
+		puts("Deaths: "+item.deaths);
 	}
 
 	private static <T> void puts(T var) {

@@ -36,8 +36,8 @@ public class Identify {
 					temp.setYear(column.toArray()[0].toString());
 					temp.setCause(column.toArray()[1].toString());
 					temp.setCauseName(column.toArray()[2].toString());
-					temp.setDeaths(column.toArray()[3].toString());
-					temp.setState(column.toArray()[4].toString());
+					temp.setState(column.toArray()[3].toString());
+					temp.setDeaths(column.toArray()[4].toString());
 					temp.setAgeAdjDeathRate(column.toArray()[5].toString());
 				}
 				else if (column.toArray().length == 9 ){
@@ -50,15 +50,14 @@ public class Identify {
 						temp.setYear(column.toArray()[0].toString());
 						temp.setCause(m.group(1));
 						temp.setCauseName(column.toArray()[5].toString());
-						temp.setDeaths(column.toArray()[6].toString());
-						temp.setState(column.toArray()[7].toString());
+						temp.setState(column.toArray()[6].toString());
+						temp.setDeaths(column.toArray()[7].toString());
 						temp.setAgeAdjDeathRate(column.toArray()[8].toString());
 					}
 					else {
 						System.exit(0);
 					}				
 				}
-
 				dataArray.add(temp);
             }
 			for (Data element : dataArray) {
