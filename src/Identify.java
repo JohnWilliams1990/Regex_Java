@@ -11,13 +11,46 @@ import java.io.InputStreamReader;
 
 // year , state and cause --> aim is to find the highest disease in the most concentrated area
 // and the lowest disease in the least concentrated area
-// Add a menu to select various feilds (upto 2)
+// Add a menu to select various fields (up to 2)
 
 public class Identify {
 	public static void main(String[] args) {
-		String year = ask("What year:");
-		String State = ask("What state:");
-		try {
+
+		List<String> arg = menu();
+		List<Bundle> bun = new ArrayList<>();
+		Bundle tmp ;//= new Bundle(); 
+		List<String> var = new ArrayList<>();;
+		for (String E : arg) {
+			//puts(E);
+			tmp = new Bundle(); 
+			if (E.equals("Year")) {
+				String year = ask("What year:");
+				var.add(year);
+				tmp.var = E;
+				tmp.val = year;
+				bun.add(tmp);
+				puts("Year");
+			} else if (E.equals("State")) {
+				String state = ask("What State:");
+				tmp.var = E;
+				tmp.val = state;
+				bun.add(tmp);
+				puts("State");
+			} else if (E.equals("Cause")) {
+				String cause = ask("What Cause:");
+				tmp.var = E;
+				tmp.val = cause;
+				bun.add(tmp);
+				puts("Cause");
+			}
+		}
+//		parse(arg, var);
+		parse(bun);
+	}
+private static void parse(List<Bundle> bun) {
+//	private static void parse(List<String> arg,List<String> var ) {
+	try {
+
 			FileInputStream fstream = new FileInputStream("LCD_US.csv");
 			BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 			//List<String> lines = new ArrayList<>();
@@ -60,10 +93,34 @@ public class Identify {
 				}
 				dataArray.add(temp);
             }
+//			for (Bundle B : bun) {
+//				puts(B.var);
+//				puts(B.val);
+//			}
 			for (Data element : dataArray) {
-				if (year.equals(element.getYear()) && !element.getCause().equals("All Causes")) {
-					Data.printData(element);
+				if ((bun.get(0).var.equals("Year") && bun.get(1).var.equals("State")) || 
+					(bun.get(1).var.equals("Year") && bun.get(0).var.equals("State"))){
+					if ((element.getYear().equals(bun.get(0).val) && element.getState().equals(bun.get(1).val)) ||
+						(element.getYear().equals(bun.get(1).val) && element.getState().equals(bun.get(0).val))){
+						Data.printData(element);
+					}
 				}
+				else if ((bun.get(0).var.equals("Year") && bun.get(1).var.equals("Cause")) ||
+						 (bun.get(1).var.equals("Year") && bun.get(0).var.equals("Cause"))){
+					if ((element.getYear().equals(bun.get(0).val) && element.getCauseName().equals(bun.get(1).val)) ||
+						(element.getYear().equals(bun.get(1).val) && element.getCauseName().equals(bun.get(0).val))){
+						Data.printData(element);
+					}
+				}
+				
+				else if ((bun.get(0).var.equals("State") && bun.get(1).var.equals("Cause")) || 
+						 (bun.get(1).var.equals("State") && bun.get(0).var.equals("Cause"))){
+					if ((element.getState().equals(bun.get(0).val) && element.getCauseName().equals(bun.get(1).val)) || 
+						(element.getYear().equals(bun.get(1).val) && element.getCauseName().equals(bun.get(0).val))){
+						Data.printData(element);
+					}	
+				}
+				else {puts(bun.get(0).var + " or " + bun.get(1).var +" cannot be found.\nPlease try Again");}
 			}
 		}
 		catch (FileNotFoundException e){ puts("File not found\n\n" + e); System.exit(0); }
@@ -89,4 +146,26 @@ public class Identify {
 
 		}		
 	}
+	private static List<String> menu() {
+		List<String> args = new ArrayList<>();
+		while (true) {
+			try {
+				puts ("Please select one of the following,");
+				puts ("by enering a letter ");
+				puts ("A: Year");
+				puts ("B: State");
+				puts ("C: Cause"); puts("");
+				BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+				String tmp = reader.readLine();			
+				if (tmp.equals("A")) { args.add("Year"); }
+				else if (tmp.equals("B")) { args.add("State"); }
+				else if (tmp.equals("C")) { args.add("Cause"); }
+				else { puts("Please Try Again"); }
+				if (args.toArray().length > 1) {
+					return args;	
+				}
+			}catch (IOException e){ puts(e);}
+		}
+	}
+
 }

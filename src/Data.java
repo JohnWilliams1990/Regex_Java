@@ -39,10 +39,12 @@ public class Data {
 	
 	public static void printData(Data item) {
 		puts("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		puts("Cause Of Death: " + item.cause);
+		puts("Cause: "+item.causeName);
+		//puts("Cause Of Death: " + item.cause);
 		puts("Year: " + item.year);
 		puts("State: "+item.state);
 		puts("Deaths: "+item.deaths);
+		
 	}
 
 	private static <T> void puts(T var) {
