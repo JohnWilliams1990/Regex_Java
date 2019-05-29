@@ -44,9 +44,7 @@ public class Data {
 		puts("Year: " + item.year);
 		puts("State: "+item.state);
 		puts("Deaths: "+item.deaths);
-		
 	}
-
 	private static <T> void puts(T var) {
 		System.out.println(var.toString());
 	}

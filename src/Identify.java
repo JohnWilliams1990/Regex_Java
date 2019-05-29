@@ -44,7 +44,6 @@ public class Identify {
 				puts("Cause");
 			}
 		}
-//		parse(arg, var);
 		parse(bun);
 	}
 private static void parse(List<Bundle> bun) {
@@ -93,10 +92,7 @@ private static void parse(List<Bundle> bun) {
 				}
 				dataArray.add(temp);
             }
-//			for (Bundle B : bun) {
-//				puts(B.var);
-//				puts(B.val);
-//			}
+
 			for (Data element : dataArray) {
 				if ((bun.get(0).var.equals("Year") && bun.get(1).var.equals("State")) || 
 					(bun.get(1).var.equals("Year") && bun.get(0).var.equals("State"))){
